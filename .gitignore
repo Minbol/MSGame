@@ -1,0 +1,32 @@
+# Visual Studio / Rider 임시 파일
+.vs/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# 언리얼 엔진 임시 및 빌드 폴더
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# 패키징된 결과물 폴더
+/Builds/
+
+# 에셋 유효성 검사 및 자동 저장 임시 파일
+/Content/Collections/
+/Content/Developers/
+
+# 소스코드 컴파일 시 생성되는 임시 파일
+*.ipch
+*.aps
+*.user
+*.target
+
+# 윈도우 및 OS 임시 파일
+Thumbs.db
+Desktop.ini
