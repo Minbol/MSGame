@@ -30,3 +30,6 @@ Saved/
 # 윈도우 및 OS 임시 파일
 Thumbs.db
 Desktop.ini
+
+# 라이더 연동 플러그인 임시 파일 제외
+Plugins/Developer/RiderLink/
