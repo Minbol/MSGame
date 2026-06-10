@@ -10,7 +10,7 @@ UMGAbility_Jump::UMGAbility_Jump(const FObjectInitializer& ObjectInitializer)
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
 
-	AbilityTags.AddTag(MGGameplayTags::AbilityTag_Jump);
+	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Jump));
 
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_Dead);
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_Knockback);

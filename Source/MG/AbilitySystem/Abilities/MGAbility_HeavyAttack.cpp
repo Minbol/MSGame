@@ -6,7 +6,7 @@
 UMGAbility_HeavyAttack::UMGAbility_HeavyAttack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	AbilityTags.AddTag(MGGameplayTags::AbilityTag_Attack_Heavy);
+	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Attack_Heavy));
 
 	ActivationOwnedTags.AddTag(MGGameplayTags::AbilityTag_Attack_Heavy);
 

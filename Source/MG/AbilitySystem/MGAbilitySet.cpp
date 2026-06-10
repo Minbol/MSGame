@@ -72,7 +72,7 @@ void UMGAbilitySet::GiveToAbilitySystem(UMGAbilitySystemComponent* ASC, FMGAbili
 		UMGGameplayAbility* AbilityCDO = AbilityToGrant.Ability->GetDefaultObject<UMGGameplayAbility>();
 		FGameplayAbilitySpec AbilitySpec(AbilityCDO, AbilityToGrant.AbilityLevel);
 		AbilitySpec.SourceObject = SourceObject;
-		AbilitySpec.DynamicAbilityTags.AddTag(AbilityToGrant.InputTag);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(AbilityToGrant.InputTag);
 
 		const FGameplayAbilitySpecHandle Handle = ASC->GiveAbility(AbilitySpec);
 

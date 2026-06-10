@@ -7,6 +7,7 @@
 #include "Components/GameFrameworkComponentManager.h"
 #include "Net/UnrealNetwork.h"
 #include "MG.h"
+#include "GameFramework/Character.h"
 
 const FName UMGPawnExtensionComponent::NAME_ActorFeatureName("PawnExtension");
 
@@ -86,6 +87,25 @@ void UMGPawnExtensionComponent::HandleChangeInitState(
 {
 	if (DesiredState == MGGameplayTags::InitState_GameplayReady)
 	{
+		// Apply ABP and default linked layers from PawnData.
+		if (PawnData && PawnData->AnimClass)
+		{
+			if (ACharacter* Character = GetPawn<ACharacter>())
+			{
+				USkeletalMeshComponent* Mesh = Character->GetMesh();
+				Mesh->SetAnimInstanceClass(PawnData->AnimClass);
+
+				if (PawnData->DefaultLocomotionLayer)
+				{
+					Mesh->LinkAnimClassLayers(PawnData->DefaultLocomotionLayer);
+				}
+				if (PawnData->DefaultCombatLayer)
+				{
+					Mesh->LinkAnimClassLayers(PawnData->DefaultCombatLayer);
+				}
+			}
+		}
+
 		// Both PawnData and ASC are guaranteed at this point.
 		// Broadcast so features (e.g. AMGPlayerCharacter) can grant abilities and bind input.
 		OnAbilitySystemInitialized.Broadcast();

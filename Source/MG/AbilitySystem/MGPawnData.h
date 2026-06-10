@@ -31,8 +31,17 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<const UMGInputConfig> InputConfig;
 
-	// AnimInstance class linked to the pawn's mesh on possession.
-	// ABP_MG_Main is the expected value for player characters.
+	// Main AnimInstance class. ABP_MG_Main for player characters.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
 	TSubclassOf<UAnimInstance> AnimClass;
+
+	// Linked layer for locomotion (ABP_MG_Locomotion).
+	// Applied immediately after AnimClass via LinkAnimClassLayers.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	TSubclassOf<UAnimInstance> DefaultLocomotionLayer;
+
+	// Linked layer for unarmed combat (ABP_MG_Combat_Unarmed).
+	// Swap at runtime with LinkAnimClassLayers when equipping weapons.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	TSubclassOf<UAnimInstance> DefaultCombatLayer;
 };

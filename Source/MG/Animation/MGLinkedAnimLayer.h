@@ -30,7 +30,7 @@ public:
 	virtual void NativeInitializeAnimation() override;
 
 	// Returns the outer ABP_MG_Main AnimInstance, or null if the layer is not yet linked.
-	UFUNCTION(BlueprintPure, Category = "MG|Animation")
+	UFUNCTION(BlueprintPure, Category = "MG|Animation", meta = (BlueprintThreadSafe))
 	UMGAnimInstance* GetOwningMGAnimInstance() const;
 
 private:

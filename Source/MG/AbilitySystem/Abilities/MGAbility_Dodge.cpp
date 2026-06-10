@@ -7,7 +7,7 @@
 UMGAbility_Dodge::UMGAbility_Dodge(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	AbilityTags.AddTag(MGGameplayTags::AbilityTag_Dodge);
+	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Dodge));
 
 	ActivationOwnedTags.AddTag(MGGameplayTags::AbilityTag_Dodge);
 	ActivationOwnedTags.AddTag(MGGameplayTags::StatusTag_Invincible);

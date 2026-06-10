@@ -22,7 +22,7 @@ void UMGAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 
 	for (const FGameplayAbilitySpec& Spec : ActivatableAbilities.Items)
 	{
-		if (Spec.Ability && Spec.DynamicAbilityTags.HasTagExact(InputTag))
+		if (Spec.Ability && Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
 		{
 			InputPressedSpecHandles.AddUnique(Spec.Handle);
 			InputHeldSpecHandles.AddUnique(Spec.Handle);
@@ -39,7 +39,7 @@ void UMGAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inpu
 
 	for (const FGameplayAbilitySpec& Spec : ActivatableAbilities.Items)
 	{
-		if (Spec.Ability && Spec.DynamicAbilityTags.HasTagExact(InputTag))
+		if (Spec.Ability && Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
 		{
 			InputReleasedSpecHandles.AddUnique(Spec.Handle);
 			InputHeldSpecHandles.Remove(Spec.Handle);

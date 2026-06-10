@@ -6,7 +6,7 @@
 UMGAbility_LightAttack::UMGAbility_LightAttack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	AbilityTags.AddTag(MGGameplayTags::AbilityTag_Attack_Light);
+	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Attack_Light));
 
 	ActivationOwnedTags.AddTag(MGGameplayTags::AbilityTag_Attack_Light);
 

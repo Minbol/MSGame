@@ -10,7 +10,7 @@ AMGPlayerState::AMGPlayerState(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// GAS needs fast updates to keep attribute changes snappy on clients.
-	NetUpdateFrequency = 100.f;
+	SetNetUpdateFrequency(100.f);
 
 	AbilitySystemComponent = ObjectInitializer.CreateDefaultSubobject<UMGAbilitySystemComponent>(this, TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
