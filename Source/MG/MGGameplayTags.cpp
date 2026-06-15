@@ -19,6 +19,10 @@ namespace MGGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Attack_Heavy, "MG.Input.Attack.Heavy");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Parry,        "MG.Input.Parry");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Interact,     "MG.Input.Interact");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Skill_1,      "MG.Input.Skill.1");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Skill_2,      "MG.Input.Skill.2");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Skill_3,      "MG.Input.Skill.3");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Skill_4,      "MG.Input.Skill.4");
 
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Jump,         "MG.Ability.Jump");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Dodge,        "MG.Ability.Dodge");

@@ -24,6 +24,10 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Attack_Heavy);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Parry);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Interact);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Skill_1);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Skill_2);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Skill_3);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Skill_4);
 
 	// Ability self-tags — applied to the ASC while the ability is active (ActivationOwnedTags)
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Jump);
