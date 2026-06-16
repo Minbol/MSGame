@@ -3,19 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/MGAbility_MontageBase.h"
+#include "AbilitySystem/Abilities/MGAbility_ComboAttackBase.h"
 #include "MGAbility_LightAttack.generated.h"
 
 /**
- * Light attack. Montage playback is handled by UMGAbility_MontageBase.
+ * 약공격 1단계 (콤보 시작점).
  *
- * Owns MG.Ability.Attack.Light while active. Blocks on the parent tag MG.Ability.Attack so that
- * LightAttack and HeavyAttack (and future attacks) are mutually exclusive.
- * Dodge is NOT blocked — dodge-cancel is intentionally allowed.
- * Not blocked while airborne (aerial combos supported).
+ * ComboAbilityTag = MG.Ability.Attack.Light.01
+ * 몽타주의 캔슬 구간에 "Send Gameplay Event (MG.Event.Combo.Continue)" 노티파이를 추가하면
+ * 버퍼된 입력이 있을 때 콤보 테이블에서 다음 어빌리티로 자동 전환됩니다.
  */
 UCLASS()
-class MG_API UMGAbility_LightAttack : public UMGAbility_MontageBase
+class MG_API UMGAbility_LightAttack : public UMGAbility_ComboAttackBase
 {
 	GENERATED_BODY()
 

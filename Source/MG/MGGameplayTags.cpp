@@ -38,4 +38,7 @@ namespace MGGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Montage_Attack, "MG.Event.Montage.Attack");
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Combo_Continue, "MG.Event.Combo.Continue");
+
+	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Light_01, "MG.Ability.Attack.Light.01");
+	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Heavy_01, "MG.Ability.Attack.Heavy.01");
 }

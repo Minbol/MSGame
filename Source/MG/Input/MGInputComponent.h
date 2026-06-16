@@ -68,7 +68,7 @@ void UMGInputComponent::BindAbilityActions(const UMGInputConfig* Config,
 		if (PressedFunc)
 		{
 			FEnhancedInputActionEventBinding& B =
-				BindAction(Action.InputAction, ETriggerEvent::Triggered, Object, PressedFunc, Action.InputTag);
+				BindAction(Action.InputAction, ETriggerEvent::Started, Object, PressedFunc, Action.InputTag);
 			OutBindingHandles.Add(B.GetHandle());
 		}
 		if (ReleasedFunc)

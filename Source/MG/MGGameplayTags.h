@@ -35,6 +35,11 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Light);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Heavy);
 
+	// Combo step tags — used as ComboAbilityTag (key in UMGComboTableDataAsset).
+	// 1단계는 C++ 선언, 이후 단계는 DefaultGameplayTags.ini 에 추가하세요.
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(ComboAbilityTag_Attack_Light_01);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(ComboAbilityTag_Attack_Heavy_01);
+
 	// Status tags — set externally by GEs, damage system, or movement callbacks
 	// Used in ActivationBlockedTags / ActivationRequiredTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(StatusTag_Dead);
