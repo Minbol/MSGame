@@ -6,6 +6,8 @@
 UMGAbility_HeavyAttack::UMGAbility_HeavyAttack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	ComboAbilityTag = MGGameplayTags::ComboAbilityTag_Attack_Heavy_01;
+
 	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Attack_Heavy));
 
 	ActivationOwnedTags.AddTag(MGGameplayTags::AbilityTag_Attack_Heavy);

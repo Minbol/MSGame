@@ -3,15 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/MGAbility_MontageBase.h"
+#include "AbilitySystem/Abilities/MGAbility_ComboAttackBase.h"
 #include "MGAbility_HeavyAttack.generated.h"
 
 /**
- * Heavy attack. Blocked while airborne — grounded commitment only.
- * Otherwise mirrors LightAttack: montage-driven, mutually exclusive with any MG.Ability.Attack.
+ * 강공격 1단계 (콤보 시작점). 공중에서는 사용 불가.
+ *
+ * ComboAbilityTag = MG.Ability.Attack.Heavy.01
  */
 UCLASS()
-class MG_API UMGAbility_HeavyAttack : public UMGAbility_MontageBase
+class MG_API UMGAbility_HeavyAttack : public UMGAbility_ComboAttackBase
 {
 	GENERATED_BODY()
 

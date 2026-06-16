@@ -37,7 +37,6 @@ void UMGAbility_MontageBase::ActivateAbility(FGameplayAbilitySpecHandle Handle,
 	UAbilityTask_PlayMontageAndWait* Task = UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(
 		this, NAME_None, MontageToPlay);
 	Task->OnCompleted.AddDynamic(this, &UMGAbility_MontageBase::OnMontageEnded);
-	Task->OnBlendOut.AddDynamic(this, &UMGAbility_MontageBase::OnMontageEnded);
 	Task->OnInterrupted.AddDynamic(this, &UMGAbility_MontageBase::OnMontageCancelled);
 	Task->OnCancelled.AddDynamic(this, &UMGAbility_MontageBase::OnMontageCancelled);
 	Task->ReadyForActivation();

@@ -1,7 +1,9 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "AbilitySystem/Components/MGAbilitySystemComponent.h"
+#include "AbilitySystem/Combo/MGComboTableDataAsset.h"
 #include "AbilitySystemGlobals.h"
+#include "MGGameplayTags.h"
 
 UMGAbilitySystemComponent::UMGAbilitySystemComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -17,6 +19,17 @@ void UMGAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 {
 	if (!InputTag.IsValid())
 	{
+		return;
+	}
+
+	// 공격 어빌리티가 활성화된 상태에서 공격 입력이 들어오면 콤보 버퍼에 저장합니다.
+	// 즉시 활성화를 시도하지 않고, 다음 콤보 윈도우가 열릴 때 테이블 조회로 전환합니다.
+	static const FGameplayTag AttackAbilityParent = FGameplayTag::RequestGameplayTag(FName("MG.Ability.Attack"));
+	static const FGameplayTag AttackInputParent   = FGameplayTag::RequestGameplayTag(FName("MG.Input.Attack"));
+
+	if (InputTag.MatchesTag(AttackInputParent) && HasMatchingGameplayTag(AttackAbilityParent))
+	{
+		PendingComboInputTag = InputTag;
 		return;
 	}
 
@@ -102,4 +115,30 @@ void UMGAbilitySystemComponent::ClearAbilityInput()
 	InputPressedSpecHandles.Reset();
 	InputReleasedSpecHandles.Reset();
 	InputHeldSpecHandles.Reset();
+}
+
+bool UMGAbilitySystemComponent::TryActivatePendingCombo(const FGameplayTag& CurrentAbilityTag)
+{
+	if (!PendingComboInputTag.IsValid() || !ComboTableAsset)
+	{
+		ClearPendingComboInput();
+		return false;
+	}
+
+	const FGameplayTag NextTag = ComboTableAsset->ResolveNextAbility(CurrentAbilityTag, PendingComboInputTag);
+	ClearPendingComboInput();
+
+	if (!NextTag.IsValid())
+	{
+		return false;
+	}
+
+	FGameplayTagContainer NextTagContainer;
+	NextTagContainer.AddTag(NextTag);
+	return TryActivateAbilitiesByTag(NextTagContainer);
+}
+
+void UMGAbilitySystemComponent::ClearPendingComboInput()
+{
+	PendingComboInputTag = FGameplayTag::EmptyTag;
 }

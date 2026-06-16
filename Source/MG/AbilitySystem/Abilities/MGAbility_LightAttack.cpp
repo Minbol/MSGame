@@ -6,6 +6,9 @@
 UMGAbility_LightAttack::UMGAbility_LightAttack(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	// 콤보 테이블 키 — UMGComboTableDataAsset::ComboMasterTable 의 Key 와 일치해야 합니다.
+	ComboAbilityTag = MGGameplayTags::ComboAbilityTag_Attack_Light_01;
+
 	SetAssetTags(FGameplayTagContainer(MGGameplayTags::AbilityTag_Attack_Light));
 
 	ActivationOwnedTags.AddTag(MGGameplayTags::AbilityTag_Attack_Light);
