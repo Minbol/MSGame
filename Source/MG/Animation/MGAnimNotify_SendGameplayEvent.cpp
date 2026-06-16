@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "MGAnimNotify_SendGameplayEvent.h"
+#include "Animation/MGAnimNotify_SendGameplayEvent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Components/SkeletalMeshComponent.h"
 
