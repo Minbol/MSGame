@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EnhancedInputComponent.h"
 #include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
 #include "MGInputConfig.generated.h"
@@ -20,6 +21,10 @@ struct FMGInputAction
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<const UInputAction> InputAction = nullptr;
+
+	// Hold IA처럼 Triggered로 받아야 하는 경우에만 변경. 기본값은 Started(단발).
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	ETriggerEvent PressTriggerEvent = ETriggerEvent::Started;
 };
 
 /**
