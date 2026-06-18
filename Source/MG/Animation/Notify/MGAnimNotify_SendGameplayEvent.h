@@ -17,7 +17,7 @@
  *
  * 타임라인에는 태그 이름이 직접 표시되어 여러 노티파이를 한눈에 구분할 수 있습니다.
  */
-UCLASS(DisplayName = "MG Send Gameplay Event")
+UCLASS(DisplayName = "Send Gameplay Event")
 class MG_API UMGAnimNotify_SendGameplayEvent : public UAnimNotify
 {
 	GENERATED_BODY()

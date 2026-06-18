@@ -9,6 +9,7 @@
 
 class UMGAbilitySystemComponent;
 class UMGPawnExtensionComponent;
+class UMGCombatComponent;
 class UMGPawnData;
 
 /**
@@ -38,6 +39,9 @@ public:
 	UFUNCTION(BlueprintPure, Category="MG|Pawn")
 	UMGPawnExtensionComponent* GetPawnExtensionComponent() const { return PawnExtensionComponent; }
 
+	UFUNCTION(BlueprintPure, Category="MG|Combat")
+	UMGCombatComponent* GetCombatComponent() const { return CombatComponent; }
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -54,4 +58,7 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MG|Components", meta=(AllowPrivateAccess))
 	TObjectPtr<UMGPawnExtensionComponent> PawnExtensionComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MG|Components", meta=(AllowPrivateAccess))
+	TObjectPtr<UMGCombatComponent> CombatComponent;
 };

@@ -13,7 +13,7 @@ struct FComboInputResolver
 {
 	GENERATED_BODY()
 
-	// 입력 태그 (예: MG.Input.Attack.Light, MG.Input.Attack.Heavy)
+	// 입력 태그 (예: MG.Input.Attack.Left, MG.Input.Attack.Right)
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FGameplayTag InputTag;
 

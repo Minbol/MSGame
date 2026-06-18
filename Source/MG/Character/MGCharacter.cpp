@@ -2,6 +2,7 @@
 
 #include "Character/MGCharacter.h"
 #include "Character/Components/MGPawnExtensionComponent.h"
+#include "Character/Components/MGCombatComponent.h"
 #include "AbilitySystem/Components/MGAbilitySystemComponent.h"
 #include "AbilitySystem/MGPawnData.h"
 #include "Components/CapsuleComponent.h"
@@ -29,6 +30,7 @@ AMGCharacter::AMGCharacter(const FObjectInitializer& ObjectInitializer)
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.f;
 
 	PawnExtensionComponent = CreateDefaultSubobject<UMGPawnExtensionComponent>(TEXT("PawnExtensionComponent"));
+	CombatComponent        = CreateDefaultSubobject<UMGCombatComponent>(TEXT("CombatComponent"));
 }
 
 UAbilitySystemComponent* AMGCharacter::GetAbilitySystemComponent() const

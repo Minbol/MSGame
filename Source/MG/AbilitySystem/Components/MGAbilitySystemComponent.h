@@ -54,7 +54,7 @@ private:
 	TArray<FGameplayAbilitySpecHandle> InputReleasedSpecHandles;
 	TArray<FGameplayAbilitySpecHandle> InputHeldSpecHandles;
 
-	// 현재 공격 중 들어온 원시 입력 태그 (예: MG.Input.Attack.Light).
+	// 현재 공격 중 들어온 원시 입력 태그 (예: MG.Input.Attack.Left).
 	// 콤보 윈도우가 열릴 때 테이블 조회에 사용됩니다.
 	FGameplayTag PendingComboInputTag;
 };

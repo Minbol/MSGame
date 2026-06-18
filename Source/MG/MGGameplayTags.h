@@ -52,4 +52,5 @@ namespace MGGameplayTags
 	// Event tags — sent via SendGameplayEventToActor for anim-notify hit detection
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Montage_Attack);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Combo_Continue);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Hit);            // 무기 스윕으로 피격 시 대상에게 전송
 }

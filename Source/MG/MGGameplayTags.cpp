@@ -15,8 +15,8 @@ namespace MGGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Jump,         "MG.Input.Jump");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Dodge,        "MG.Input.Dodge");
-	UE_DEFINE_GAMEPLAY_TAG(InputTag_Attack_Light, "MG.Input.Attack.Light");
-	UE_DEFINE_GAMEPLAY_TAG(InputTag_Attack_Heavy, "MG.Input.Attack.Heavy");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Attack_Light, "MG.Input.Attack.Left");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Attack_Heavy, "MG.Input.Attack.Right");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Parry,        "MG.Input.Parry");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Interact,     "MG.Input.Interact");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Skill_1,      "MG.Input.Skill.1");
@@ -38,6 +38,7 @@ namespace MGGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Montage_Attack, "MG.Event.Montage.Attack");
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Combo_Continue, "MG.Event.Combo.Continue");
+	UE_DEFINE_GAMEPLAY_TAG(EventTag_Hit,            "MG.Event.Hit");
 
 	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Light_01, "MG.Ability.Attack.Light.01");
 	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Heavy_01, "MG.Ability.Attack.Heavy.01");
