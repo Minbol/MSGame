@@ -39,6 +39,9 @@ protected:
 	// Call EndAbility inside this function to abort before the montage plays.
 	virtual void OnBeforeMontagePlayed() {}
 
+	// Called when the montage finishes normally (not interrupted/cancelled). Override for post-success logic.
+	virtual void OnMontageCompleted() {}
+
 private:
 	UFUNCTION()
 	void OnMontageEnded();

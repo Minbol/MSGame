@@ -16,6 +16,7 @@ UMGAbility_ComboAttackBase::UMGAbility_ComboAttackBase(const FObjectInitializer&
 	ActivationBlockedTags.AddTag(AttackParentTag);
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_Dead);
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_Knockback);
+	ActivationBlockedTags.AddTag(MGGameplayTags::AbilityTag_Dodge);
 }
 
 void UMGAbility_ComboAttackBase::OnBeforeMontagePlayed()
@@ -33,21 +34,14 @@ void UMGAbility_ComboAttackBase::OnBeforeMontagePlayed()
 
 void UMGAbility_ComboAttackBase::OnComboWindowEvent(FGameplayEventData Payload)
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("[ComboWindow] OnComboWindowEvent called"));
-	}
-
 	UMGAbilitySystemComponent* MGASC = GetMGAbilitySystemComponent();
 	if (!MGASC || !ComboAbilityTag.IsValid())
 	{
-		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("[ComboWindow] MGASC or ComboAbilityTag invalid"));
 		return;
 	}
 
 	if (!MGASC->HasPendingComboInput())
 	{
-		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Orange, TEXT("[ComboWindow] No pending input"));
 		return;
 	}
 

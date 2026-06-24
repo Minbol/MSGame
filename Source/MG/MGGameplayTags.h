@@ -22,6 +22,9 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Dodge);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Attack_Light);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Attack_Heavy);
+	// 연계기 전용 홀드 입력 (MG.Input.Attack 부모에서 분리 → 콤보 버퍼에 걸리지 않음)
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_ChainSkill_Left_Hold);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_ChainSkill_Right_Hold);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Parry);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Interact);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Skill_1);
@@ -34,6 +37,13 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Dodge);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Light);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Heavy);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_Counter1);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_Counter2);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_ChainReflection1);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_ChainReflection2);
+
+	// 연계기 윈도우 이벤트 — 몽타주 AnimNotify 에서 이 태그로 SendGameplayEvent 를 호출합니다.
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_ChainSkill_Window);
 
 	// Combo step tags — used as ComboAbilityTag (key in UMGComboTableDataAsset).
 	// 1단계는 C++ 선언, 이후 단계는 DefaultGameplayTags.ini 에 추가하세요.

@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "AbilitySystem/Abilities/MGAbility_Dodge.h"
+
+#include "AbilitySystemComponent.h"
 #include "Character/MGCharacter.h"
 #include "MGGameplayTags.h"
 
@@ -17,10 +19,16 @@ UMGAbility_Dodge::UMGAbility_Dodge(const FObjectInitializer& ObjectInitializer)
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_Stagger);
 	ActivationBlockedTags.AddTag(MGGameplayTags::StatusTag_InAir);
 	ActivationBlockedTags.AddTag(MGGameplayTags::AbilityTag_Dodge);
+
+	// 연계기 테이블에서 이 키로 역조(Counter)를 조회합니다.
+	ChainAbilityTag = MGGameplayTags::AbilityTag_Dodge;
 }
 
 void UMGAbility_Dodge::OnBeforeMontagePlayed()
 {
+	// 연계 윈도우 이벤트 리스너 등록 (MG.Event.ChainSkill.Window 대기)
+	Super::OnBeforeMontagePlayed();
+
 	AMGCharacter* Character = GetMGCharacterFromActorInfo();
 	if (!Character)
 	{

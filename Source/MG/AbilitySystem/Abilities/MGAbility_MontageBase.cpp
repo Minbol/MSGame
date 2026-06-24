@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Abilities/MGAbility_MontageBase.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+#include "Engine/Engine.h"
 
 UMGAbility_MontageBase::UMGAbility_MontageBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -19,6 +20,16 @@ void UMGAbility_MontageBase::ActivateAbility(FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
+
+#if !UE_BUILD_SHIPPING
+	if (GEngine)
+	{
+		const FString AbilityName = GetClass()->GetName();
+		const FString Tags = AbilityTags.ToString();
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Cyan,
+			FString::Printf(TEXT("[Ability] %s | Tags: %s"), *AbilityName, *Tags));
+	}
+#endif
 
 	OnBeforeMontagePlayed();
 
@@ -44,6 +55,7 @@ void UMGAbility_MontageBase::ActivateAbility(FGameplayAbilitySpecHandle Handle,
 
 void UMGAbility_MontageBase::OnMontageEnded()
 {
+	OnMontageCompleted();
 	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, false, false);
 }
 

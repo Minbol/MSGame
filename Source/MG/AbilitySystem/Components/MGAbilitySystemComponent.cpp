@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Components/MGAbilitySystemComponent.h"
 #include "AbilitySystem/Combo/MGComboTableDataAsset.h"
+#include "AbilitySystem/ChainSkill/MGChainSkillTableDataAsset.h"
 #include "AbilitySystemGlobals.h"
 #include "MGGameplayTags.h"
 
@@ -22,8 +23,10 @@ void UMGAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 		return;
 	}
 
+	// 연계기 윈도우 조회를 위해 홀드 중인 입력을 항상 추적합니다.
+	CurrentlyHeldInputTags.Add(InputTag);
+
 	// 공격 어빌리티가 활성화된 상태에서 공격 입력이 들어오면 콤보 버퍼에 저장합니다.
-	// 즉시 활성화를 시도하지 않고, 다음 콤보 윈도우가 열릴 때 테이블 조회로 전환합니다.
 	static const FGameplayTag AttackAbilityParent = FGameplayTag::RequestGameplayTag(FName("MG.Ability.Attack"));
 	static const FGameplayTag AttackInputParent   = FGameplayTag::RequestGameplayTag(FName("MG.Input.Attack"));
 
@@ -50,6 +53,8 @@ void UMGAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inpu
 		return;
 	}
 
+	CurrentlyHeldInputTags.Remove(InputTag);
+
 	for (const FGameplayAbilitySpec& Spec : ActivatableAbilities.Items)
 	{
 		if (Spec.Ability && Spec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
@@ -68,7 +73,6 @@ void UMGAbilitySystemComponent::ProcessAbilityInput(float DeltaTime, bool bGameP
 		return;
 	}
 
-	// Activate newly pressed abilities.
 	for (const FGameplayAbilitySpecHandle& Handle : InputPressedSpecHandles)
 	{
 		if (FGameplayAbilitySpec* Spec = FindAbilitySpecFromHandle(Handle))
@@ -89,7 +93,6 @@ void UMGAbilitySystemComponent::ProcessAbilityInput(float DeltaTime, bool bGameP
 		}
 	}
 
-	// Notify released abilities.
 	for (const FGameplayAbilitySpecHandle& Handle : InputReleasedSpecHandles)
 	{
 		if (FGameplayAbilitySpec* Spec = FindAbilitySpecFromHandle(Handle))
@@ -141,4 +144,31 @@ bool UMGAbilitySystemComponent::TryActivatePendingCombo(const FGameplayTag& Curr
 void UMGAbilitySystemComponent::ClearPendingComboInput()
 {
 	PendingComboInputTag = FGameplayTag::EmptyTag;
+}
+
+bool UMGAbilitySystemComponent::HasChainSkillInput(const FGameplayTag& CurrentAbilityTag) const
+{
+	if (!ChainSkillTableAsset || !CurrentAbilityTag.IsValid())
+	{
+		return false;
+	}
+	return ChainSkillTableAsset->ResolveNextAbility(CurrentAbilityTag, CurrentlyHeldInputTags).IsValid();
+}
+
+bool UMGAbilitySystemComponent::TryActivateChainSkill(const FGameplayTag& CurrentAbilityTag)
+{
+	if (!ChainSkillTableAsset || !CurrentAbilityTag.IsValid())
+	{
+		return false;
+	}
+
+	const FGameplayTag NextTag = ChainSkillTableAsset->ResolveNextAbility(CurrentAbilityTag, CurrentlyHeldInputTags);
+	if (!NextTag.IsValid())
+	{
+		return false;
+	}
+
+	FGameplayTagContainer NextTagContainer;
+	NextTagContainer.AddTag(NextTag);
+	return TryActivateAbilitiesByTag(NextTagContainer);
 }

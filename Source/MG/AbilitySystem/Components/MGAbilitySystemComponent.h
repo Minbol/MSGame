@@ -7,6 +7,7 @@
 #include "MGAbilitySystemComponent.generated.h"
 
 class UMGComboTableDataAsset;
+class UMGChainSkillTableDataAsset;
 
 UCLASS()
 class MG_API UMGAbilitySystemComponent : public UAbilitySystemComponent
@@ -42,19 +43,34 @@ public:
 	bool HasPendingComboInput() const { return PendingComboInputTag.IsValid(); }
 
 	// 콤보 윈도우가 열렸을 때 ComboAttackBase 가 호출합니다.
-	// CurrentAbilityTag + PendingComboInputTag 로 테이블 조회 후 다음 어빌리티 활성화.
-	// 전환 성공 시 true 반환.
 	bool TryActivatePendingCombo(const FGameplayTag& CurrentAbilityTag);
 
 	// 버퍼된 콤보 입력을 초기화합니다.
 	void ClearPendingComboInput();
+
+	// -----------------------------------------------------------------------
+	// Chain Skill System
+	// -----------------------------------------------------------------------
+
+	// 게임 전체 연계기 테이블. PlayerState BP 또는 에디터에서 할당하세요.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "ChainSkill")
+	TObjectPtr<UMGChainSkillTableDataAsset> ChainSkillTableAsset;
+
+	// 현재 홀드 중인 입력이 연계기 테이블과 매칭되는지 확인합니다 (EndAbility 전 사전 검사용).
+	bool HasChainSkillInput(const FGameplayTag& CurrentAbilityTag) const;
+
+	// 연계기 윈도우가 열렸을 때 ChainSkillBase 가 호출합니다.
+	// CurrentlyHeldInputTags 를 테이블에서 조회해 다음 어빌리티를 활성화합니다.
+	bool TryActivateChainSkill(const FGameplayTag& CurrentAbilityTag);
 
 private:
 	TArray<FGameplayAbilitySpecHandle> InputPressedSpecHandles;
 	TArray<FGameplayAbilitySpecHandle> InputReleasedSpecHandles;
 	TArray<FGameplayAbilitySpecHandle> InputHeldSpecHandles;
 
-	// 현재 공격 중 들어온 원시 입력 태그 (예: MG.Input.Attack.Left).
-	// 콤보 윈도우가 열릴 때 테이블 조회에 사용됩니다.
+	// 현재 공격 중 들어온 원시 입력 태그 (콤보 윈도우에서 테이블 조회에 사용).
 	FGameplayTag PendingComboInputTag;
+
+	// 현재 홀드 중인 모든 입력 태그 (연계기 윈도우에서 테이블 조회에 사용).
+	TSet<FGameplayTag> CurrentlyHeldInputTags;
 };
