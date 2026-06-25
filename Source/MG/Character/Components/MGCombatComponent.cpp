@@ -5,6 +5,13 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Character.h"
+#include "DrawDebugHelpers.h"
+
+static TAutoConsoleVariable<int32> CVarAttackCheck(
+	TEXT("AttackCheck"),
+	0,
+	TEXT("1: 공격 스윕 콜리전 디버그 표시 | 0: 숨김")
+);
 
 UMGCombatComponent::UMGCombatComponent()
 {
@@ -58,6 +65,20 @@ void UMGCombatComponent::PerformSweep()
 	// 이전~현재 소켓 중점 사이를 구형으로 스윕
 	const FVector SweepStart = (PreviousBasePos + PreviousTipPos) * 0.5f;
 	const FVector SweepEnd   = (CurrentBase + CurrentTip) * 0.5f;
+
+#if !UE_BUILD_SHIPPING
+	if (CVarAttackCheck.GetValueOnGameThread())
+	{
+		const float DrawDuration = 0.1f;
+		// 무기 양 끝점 (Base ~ Tip 라인)
+		DrawDebugLine(GetWorld(), CurrentBase, CurrentTip, FColor::Yellow, false, DrawDuration, 0, 2.f);
+		// 각 끝점의 판정 반경
+		DrawDebugSphere(GetWorld(), CurrentBase, SweepRadius, 12, FColor::Red, false, DrawDuration);
+		DrawDebugSphere(GetWorld(), CurrentTip,  SweepRadius, 12, FColor::Red, false, DrawDuration);
+		// 실제 스윕 궤적 (중점 이동 경로)
+		DrawDebugLine(GetWorld(), SweepStart, SweepEnd, FColor::Orange, false, DrawDuration, 0, 1.f);
+	}
+#endif
 
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(OwnerChar);

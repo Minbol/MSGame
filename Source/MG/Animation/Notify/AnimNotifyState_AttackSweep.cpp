@@ -1,10 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "AnimNotifyState_WeaponSweep.h"
+#include "AnimNotifyState_AttackSweep.h"
 #include "Character/Components/MGCombatComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 
-UAnimNotifyState_WeaponSweep::UAnimNotifyState_WeaponSweep()
+UAnimNotifyState_AttackSweep::UAnimNotifyState_AttackSweep()
 {
     // 기본값 세팅
     BaseSocketName = TEXT("Weapon_Base");
@@ -13,7 +13,7 @@ UAnimNotifyState_WeaponSweep::UAnimNotifyState_WeaponSweep()
     DamageMultiplier = 1.0f;
 }
 
-void UAnimNotifyState_WeaponSweep::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
+void UAnimNotifyState_AttackSweep::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
     Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
     
@@ -27,7 +27,7 @@ void UAnimNotifyState_WeaponSweep::NotifyBegin(USkeletalMeshComponent* MeshComp,
     }
 }
 
-void UAnimNotifyState_WeaponSweep::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference)
+void UAnimNotifyState_AttackSweep::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference)
 {
     Super::NotifyTick(MeshComp, Animation, FrameDeltaTime, EventReference);
 
@@ -41,7 +41,7 @@ void UAnimNotifyState_WeaponSweep::NotifyTick(USkeletalMeshComponent* MeshComp, 
     }
 }
 
-void UAnimNotifyState_WeaponSweep::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
+void UAnimNotifyState_AttackSweep::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
     Super::NotifyEnd(MeshComp, Animation, EventReference);
 

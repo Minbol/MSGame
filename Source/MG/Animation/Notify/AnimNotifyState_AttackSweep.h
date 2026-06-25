@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimNotifies/AnimNotifyState.h"
-#include "AnimNotifyState_WeaponSweep.generated.h"
+#include "AnimNotifyState_AttackSweep.generated.h"
 
 /**
  * 
  */
 UCLASS(DisplayName = "Waepon Sweep")
-class MG_API UAnimNotifyState_WeaponSweep : public UAnimNotifyState
+class MG_API UAnimNotifyState_AttackSweep : public UAnimNotifyState
 {
 	GENERATED_BODY()
 
 public:
-    UAnimNotifyState_WeaponSweep();
+    UAnimNotifyState_AttackSweep();
 
     virtual void NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference) override;
     virtual void NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference) override;
