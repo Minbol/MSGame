@@ -61,6 +61,7 @@ private:
 
 	// Native input callbacks (bound in SetupPlayerInputComponent).
 	void Input_Move(const struct FInputActionValue& Value);
+	void Input_MoveStarted(const struct FInputActionValue& Value);
 	void Input_Look(const struct FInputActionValue& Value);
 
 	// GAS input callbacks — routed through the ASC via InputTag.

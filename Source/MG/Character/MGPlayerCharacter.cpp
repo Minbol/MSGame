@@ -157,6 +157,9 @@ void AMGPlayerCharacter::BindInputActions()
 	// Native actions.
 	MGIC->BindNativeAction(InputConfig, MGGameplayTags::InputTag_Move,
 		ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+	// Started 는 키가 새로 눌리는 첫 프레임에만 발생 — 이동 캔슬 판정에 사용
+	MGIC->BindNativeAction(InputConfig, MGGameplayTags::InputTag_Move,
+		ETriggerEvent::Started, this, &ThisClass::Input_MoveStarted);
 
 	MGIC->BindNativeAction(InputConfig, MGGameplayTags::InputTag_Look,
 		ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
@@ -178,6 +181,25 @@ void AMGPlayerCharacter::Tick(float DeltaSeconds)
 		{
 			ASC->ProcessAbilityInput(DeltaSeconds, false);
 		}
+	}
+}
+
+void AMGPlayerCharacter::Input_MoveStarted(const FInputActionValue& Value)
+{
+	// ETriggerEvent::Started — 키가 새로 눌리는 첫 프레임에만 호출됨.
+	// 이미 누르고 있던 이동키는 여기에 해당되지 않으므로 오발 캔슬을 방지합니다.
+	UMGAbilitySystemComponent* ASC = GetPawnExtensionComponent()->GetMGAbilitySystemComponent();
+	if (!ASC) { return; }
+
+	if (ASC->HasMatchingGameplayTag(MGGameplayTags::StatusTag_MoveCancelWindow))
+	{
+		FGameplayTagContainer CancelWithTags;
+		CancelWithTags.AddTag(MGGameplayTags::AbilityTag_Attack);
+		CancelWithTags.AddTag(MGGameplayTags::AbilityTag_ChainSkill);
+		ASC->CancelAbilities(&CancelWithTags, nullptr, nullptr);
+
+		// CancelAbility → StopMontage → NotifyEnd 로 제거되지만 동일 프레임 안전 보장
+		ASC->RemoveLooseGameplayTag(MGGameplayTags::StatusTag_MoveCancelWindow);
 	}
 }
 

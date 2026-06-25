@@ -30,19 +30,22 @@ namespace MGGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Jump,         "MG.Ability.Jump");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Dodge,        "MG.Ability.Dodge");
+	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Attack,       "MG.Ability.Attack");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Attack_Light, "MG.Ability.Attack.Light");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_Attack_Heavy, "MG.Ability.Attack.Heavy");
+	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill,   "MG.Ability.ChainSkill");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_Counter1,         "MG.Ability.ChainSkill.Counter1");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_Counter2,         "MG.Ability.ChainSkill.Counter2");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_ChainReflection1, "MG.Ability.ChainSkill.ChainReflection1");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_ChainReflection2, "MG.Ability.ChainSkill.ChainReflection2");
 
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Dead,       "MG.Status.Dead");
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Knockback,  "MG.Status.Knockback");
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Stagger,    "MG.Status.Stagger");
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Invincible, "MG.Status.Invincible");
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Parrying,   "MG.Status.Parrying");
-	UE_DEFINE_GAMEPLAY_TAG(StatusTag_InAir,      "MG.Status.InAir");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Dead,             "MG.Status.Dead");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Knockback,        "MG.Status.Knockback");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Stagger,          "MG.Status.Stagger");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Invincible,       "MG.Status.Invincible");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Parrying,         "MG.Status.Parrying");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_InAir,            "MG.Status.InAir");
+	UE_DEFINE_GAMEPLAY_TAG(StatusTag_MoveCancelWindow, "MG.Status.MoveCancelWindow");
 
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Montage_Attack,   "MG.Event.Montage.Attack");
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Combo_Continue,   "MG.Event.Combo.Continue");

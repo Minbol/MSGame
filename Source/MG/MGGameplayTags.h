@@ -35,8 +35,10 @@ namespace MGGameplayTags
 	// Ability self-tags — applied to the ASC while the ability is active (ActivationOwnedTags)
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Jump);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Dodge);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack);           // 부모 태그: MG.Ability.Attack.*
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Light);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_Attack_Heavy);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill);       // 부모 태그: MG.Ability.ChainSkill.*
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_Counter1);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_Counter2);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_ChainReflection1);
@@ -58,6 +60,9 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(StatusTag_Invincible);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(StatusTag_Parrying);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(StatusTag_InAir);
+	// 이동 입력으로 몽타주를 캔슬할 수 있는 창이 열려 있음을 나타내는 태그
+	// AnimNotifyState_MontageCancel 이 Begin/End 에서 추가/제거합니다.
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(StatusTag_MoveCancelWindow);
 
 	// Event tags — sent via SendGameplayEventToActor for anim-notify hit detection
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Montage_Attack);
