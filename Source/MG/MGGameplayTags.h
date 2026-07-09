@@ -43,6 +43,7 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_Counter2);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_ChainReflection1);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_ChainSkill_ChainReflection2);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(AbilityTag_HitReact);         // 피격 반응 어빌리티 — MG.Event.Hit 이벤트로 자동 활성화
 
 	// 연계기 윈도우 이벤트 — 몽타주 AnimNotify 에서 이 태그로 SendGameplayEvent 를 호출합니다.
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_ChainSkill_Window);
@@ -68,4 +69,9 @@ namespace MGGameplayTags
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Montage_Attack);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Combo_Continue);
 	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(EventTag_Hit);            // 무기 스윕으로 피격 시 대상에게 전송
+
+	// 피격 반응 강도 — EventTag_Hit 페이로드의 InstigatorTags 에 실려 전달됩니다.
+	// AnimNotifyState_AttackSweep 의 HitReactionType(EMGHitReactionType) 값에서 변환됩니다.
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReactionTag_Weak);
+	MG_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReactionTag_Strong);
 }

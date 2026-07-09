@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimNotifies/AnimNotifyState.h"
+#include "Character/Components/MGCombatTypes.h"
 #include "AnimNotifyState_AttackSweep.generated.h"
 
 /**
@@ -34,4 +35,8 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Data")
     float DamageMultiplier;
+
+    // 이 스윕에 맞았을 때 피격자가 재생할 피격 반응 강도 (약피격 / 강피격)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Data")
+    EMGHitReactionType HitReactionType;
 };

@@ -29,4 +29,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "MG|Ability")
 	AMGCharacter* GetMGCharacterFromActorInfo() const;
+
+protected:
+	// 엔진 기본 구현은 빈 함수라 WaitInputPress/WaitInputRelease 태스크가 절대 발화하지 않습니다.
+	// ASC 로 InvokeReplicatedEvent 를 직접 쏴줘야 태스크의 델리게이트가 실행됩니다.
+	virtual void InputPressed(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+		const FGameplayAbilityActivationInfo ActivationInfo) override;
+	virtual void InputReleased(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+		const FGameplayAbilityActivationInfo ActivationInfo) override;
 };

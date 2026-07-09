@@ -31,7 +31,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MG|CameraShake")
 	TSubclassOf<UCameraShakeBase> ShakeClass;
 
-	// 쉐이크 강도 배율 (기본값 1.0).
+	// 쉐이크 강도 배율 (기본값 1.0). 전체 쉐이크(위치+회전+FOV)에 곱해집니다.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MG|CameraShake", meta = (ClampMin = "0.0"))
 	float ShakeScale = 1.0f;
+
+	// 위치 쉐이크 진폭 배율 (X, Y, Z). ShakeClass의 PerlinNoise 패턴에 축별로 곱해집니다.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MG|CameraShake")
+	FVector LocationScale = FVector(1.0f, 1.0f, 1.0f);
+
+	// 회전 쉐이크 진폭 배율 (Pitch, Yaw, Roll). ShakeClass의 PerlinNoise 패턴에 축별로 곱해집니다.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MG|CameraShake")
+	FRotator RotationScale = FRotator(1.0f, 1.0f, 1.0f);
+
+	// FOV 쉐이크 진폭 배율. ShakeClass의 PerlinNoise 패턴에 곱해지며, 쉐이크가 끝나면 원래 FOV로 자동 복귀합니다.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MG|CameraShake")
+	float FOVScale = 1.0f;
 };

@@ -5,6 +5,7 @@
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Shakes/PerlinNoiseCameraShakePattern.h"
 
 void UMGAnimNotify_CameraShake::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
 	const FAnimNotifyEventReference& EventReference)
@@ -38,7 +39,19 @@ void UMGAnimNotify_CameraShake::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
 		return;
 	}
 
-	PC->PlayerCameraManager->StartCameraShake(ShakeClass, ShakeScale);
+	UCameraShakeBase* Shake = PC->PlayerCameraManager->StartCameraShake(ShakeClass, ShakeScale);
+	if (UPerlinNoiseCameraShakePattern* PerlinPattern = Shake ? Cast<UPerlinNoiseCameraShakePattern>(Shake->GetRootShakePattern()) : nullptr)
+	{
+		PerlinPattern->X.Amplitude *= LocationScale.X;
+		PerlinPattern->Y.Amplitude *= LocationScale.Y;
+		PerlinPattern->Z.Amplitude *= LocationScale.Z;
+
+		PerlinPattern->Pitch.Amplitude *= RotationScale.Pitch;
+		PerlinPattern->Yaw.Amplitude *= RotationScale.Yaw;
+		PerlinPattern->Roll.Amplitude *= RotationScale.Roll;
+
+		PerlinPattern->FOV.Amplitude *= FOVScale;
+	}
 }
 
 FString UMGAnimNotify_CameraShake::GetNotifyName_Implementation() const

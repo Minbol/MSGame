@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "MGCombatTypes.h"
 #include "MGCombatComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHitDetected, AActor*, HitActor, float, DamageMultiplier);
@@ -21,7 +22,7 @@ class MG_API UMGCombatComponent : public UActorComponent
 public:
 	UMGCombatComponent();
 
-	void BeginWeaponSweep(FName InBaseSocket, FName InTipSocket, float InRadius, float InDamageMultiplier);
+	void BeginWeaponSweep(FName InBaseSocket, FName InTipSocket, float InRadius, float InDamageMultiplier, EMGHitReactionType InHitReactionType = EMGHitReactionType::Weak);
 	void TickWeaponSweep();
 	void EndWeaponSweep();
 
@@ -42,6 +43,7 @@ private:
 	FName TipSocketName;
 	float SweepRadius     = 15.f;
 	float DamageMultiplier = 1.f;
+	EMGHitReactionType HitReactionType = EMGHitReactionType::Weak;
 
 	FVector PreviousBasePos = FVector::ZeroVector;
 	FVector PreviousTipPos  = FVector::ZeroVector;

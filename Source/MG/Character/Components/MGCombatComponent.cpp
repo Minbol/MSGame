@@ -19,7 +19,7 @@ UMGCombatComponent::UMGCombatComponent()
 	SweepChannel = ECC_Pawn;
 }
 
-void UMGCombatComponent::BeginWeaponSweep(FName InBaseSocket, FName InTipSocket, float InRadius, float InDamageMultiplier)
+void UMGCombatComponent::BeginWeaponSweep(FName InBaseSocket, FName InTipSocket, float InRadius, float InDamageMultiplier, EMGHitReactionType InHitReactionType)
 {
 	ACharacter* OwnerChar = Cast<ACharacter>(GetOwner());
 	if (!OwnerChar) return;
@@ -31,6 +31,7 @@ void UMGCombatComponent::BeginWeaponSweep(FName InBaseSocket, FName InTipSocket,
 	TipSocketName   = InTipSocket;
 	SweepRadius     = InRadius;
 	DamageMultiplier = InDamageMultiplier;
+	HitReactionType  = InHitReactionType;
 
 	HitActors.Empty();
 	PreviousBasePos = Mesh->GetSocketLocation(BaseSocketName);
@@ -102,11 +103,23 @@ void UMGCombatComponent::PerformSweep()
 
 		HitActors.Add(HitActor);
 
+#if !UE_BUILD_SHIPPING
+		if (CVarAttackCheck.GetValueOnGameThread())
+		{
+			// 실제로 충돌이 판정된 지점만 빨간색으로 강조 표시
+			DrawDebugSphere(GetWorld(), Hit.ImpactPoint, SweepRadius, 12, FColor::Red, false, 0.5f, 0, 3.f);
+			DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 20.f, FColor::Red, false, 0.5f);
+		}
+#endif
+
 		// GAS 이벤트로 피격 전달 — 대상 ASC가 MG.Event.Hit 어빌리티로 반응
 		FGameplayEventData Payload;
 		Payload.Instigator      = OwnerChar;
 		Payload.Target          = HitActor;
 		Payload.EventMagnitude  = DamageMultiplier;
+		Payload.InstigatorTags.AddTag(HitReactionType == EMGHitReactionType::Strong
+			? MGGameplayTags::HitReactionTag_Strong
+			: MGGameplayTags::HitReactionTag_Weak);
 		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 			HitActor,
 			MGGameplayTags::EventTag_Hit,

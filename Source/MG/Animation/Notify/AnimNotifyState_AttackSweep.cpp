@@ -11,6 +11,7 @@ UAnimNotifyState_AttackSweep::UAnimNotifyState_AttackSweep()
     TipSocketName = TEXT("Weapon_Tip");
     SweepRadius = 15.0f;
     DamageMultiplier = 1.0f;
+    HitReactionType = EMGHitReactionType::Weak;
 }
 
 void UAnimNotifyState_AttackSweep::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
@@ -22,7 +23,7 @@ void UAnimNotifyState_AttackSweep::NotifyBegin(USkeletalMeshComponent* MeshComp,
         // 액터에 붙어있는 전투 컴포넌트를 찾아 Sweep 시작을 알림
         if (UMGCombatComponent* CombatComp = MeshComp->GetOwner()->FindComponentByClass<UMGCombatComponent>())
         {
-            CombatComp->BeginWeaponSweep(BaseSocketName, TipSocketName, SweepRadius, DamageMultiplier);
+            CombatComp->BeginWeaponSweep(BaseSocketName, TipSocketName, SweepRadius, DamageMultiplier, HitReactionType);
         }
     }
 }

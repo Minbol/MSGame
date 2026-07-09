@@ -39,6 +39,9 @@ public class MG : ModuleRules
 			"SlateCore",
 			"CommonUI",
 			"CommonInput",
+
+			// Camera Shake (PerlinNoise pattern 축별 스케일 조정용)
+			"EngineCameras",
 		});
 
 		PublicIncludePaths.AddRange(new string[] { "MG" });

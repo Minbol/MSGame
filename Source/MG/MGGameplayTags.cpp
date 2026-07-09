@@ -38,6 +38,7 @@ namespace MGGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_Counter2,         "MG.Ability.ChainSkill.Counter2");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_ChainReflection1, "MG.Ability.ChainSkill.ChainReflection1");
 	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_ChainSkill_ChainReflection2, "MG.Ability.ChainSkill.ChainReflection2");
+	UE_DEFINE_GAMEPLAY_TAG(AbilityTag_HitReact,                    "MG.Ability.HitReact");
 
 	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Dead,             "MG.Status.Dead");
 	UE_DEFINE_GAMEPLAY_TAG(StatusTag_Knockback,        "MG.Status.Knockback");
@@ -51,6 +52,9 @@ namespace MGGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Combo_Continue,   "MG.Event.Combo.Continue");
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_ChainSkill_Window, "MG.Event.ChainSkill.Window");
 	UE_DEFINE_GAMEPLAY_TAG(EventTag_Hit,              "MG.Event.Hit");
+
+	UE_DEFINE_GAMEPLAY_TAG(HitReactionTag_Weak,   "MG.Combat.HitReaction.Weak");
+	UE_DEFINE_GAMEPLAY_TAG(HitReactionTag_Strong, "MG.Combat.HitReaction.Strong");
 
 	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Light_01, "MG.Ability.Attack.Light.01");
 	UE_DEFINE_GAMEPLAY_TAG(ComboAbilityTag_Attack_Heavy_01, "MG.Ability.Attack.Heavy.01");
