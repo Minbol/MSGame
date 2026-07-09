@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/MGCharacter.h"
+#include "AbilitySystem/MGAbilitySet.h"
 #include "MGEnemyCharacter.generated.h"
 
 class UMGAbilitySystemComponent;
@@ -29,6 +30,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	// Called when PawnExtensionComponent broadcasts OnAbilitySystemInitialized — grants PawnData->AbilitySet.
+	void OnAbilitySystemInitialized();
+
 	UPROPERTY(VisibleAnywhere, Category="MG|Ability")
 	TObjectPtr<UMGAbilitySystemComponent> AbilitySystemComponent;
 
@@ -37,4 +41,7 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UMGCombatSet> CombatSet;
+
+	// Handles returned when the AbilitySet is granted — used to revoke on uninit.
+	FMGAbilitySet_GrantedHandles AbilitySetHandles;
 };
