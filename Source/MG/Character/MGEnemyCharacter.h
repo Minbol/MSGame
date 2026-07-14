@@ -26,6 +26,10 @@ class MG_API AMGEnemyCharacter : public AMGCharacter
 public:
 	AMGEnemyCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
+	// 몬스터 최대 체력 — 몬스터 BP(예: BP_Monster)에서 설정합니다. BeginPlay 에서 HealthSet 에 반영됩니다.
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "MG|Health")
+	float MaxHealth = 100.f;
+
 protected:
 	virtual void BeginPlay() override;
 

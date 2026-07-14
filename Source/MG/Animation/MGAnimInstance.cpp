@@ -72,6 +72,18 @@ void UMGAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	// ── Status / Ability tags ──────────────────────────────────────────────────
 
+	// NativeInitializeAnimation may have run before the owner's ASC was wired up
+	// (e.g. AI pawns whose Mesh gets its AnimClass before PawnExtensionComponent
+	// finishes InitAbilitySystem). Keep retrying until it resolves.
+	if (!AbilitySystemComponent.IsValid())
+	{
+		if (AActor* Owner = GetOwningActor())
+		{
+			AbilitySystemComponent = Cast<UMGAbilitySystemComponent>(
+				UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(Owner));
+		}
+	}
+
 	const UMGAbilitySystemComponent* ASC = AbilitySystemComponent.Get();
 	if (!ASC)
 	{
