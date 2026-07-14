@@ -21,6 +21,10 @@ AMGEnemyCharacter::AMGEnemyCharacter(const FObjectInitializer& ObjectInitializer
 
 void AMGEnemyCharacter::BeginPlay()
 {
+	// BP 에서 설정한 MaxHealth 를 HealthSet 에 반영 (에디터 CDO 값은 생성자 시점엔 아직 적용되지 않음).
+	HealthSet->InitMaxHealth(MaxHealth);
+	HealthSet->InitHealth(MaxHealth);
+
 	// Bind before Super::BeginPlay() / InitializeAbilitySystem() in case the init-state
 	// chain reaches GameplayReady synchronously and broadcasts immediately.
 	GetPawnExtensionComponent()->OnAbilitySystemInitialized.AddUObject(this, &ThisClass::OnAbilitySystemInitialized);

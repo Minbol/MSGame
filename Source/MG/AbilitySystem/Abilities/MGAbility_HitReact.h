@@ -6,6 +6,8 @@
 #include "AbilitySystem/Abilities/MGGameplayAbility.h"
 #include "MGAbility_HitReact.generated.h"
 
+class UAbilityTask_PlayMontageAndWait;
+
 /**
  * 피격 반응 어빌리티.
  *
@@ -34,10 +36,22 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "MG|HitReact")
 	TObjectPtr<UAnimMontage> StrongHitMontage;
 
+	// 노티파이의 DamageMultiplier 에 곱해질 기본 데미지
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "MG|HitReact")
+	float BaseDamage = 1.f;
+
 private:
 	UFUNCTION()
 	void OnMontageEnded();
 
 	UFUNCTION()
 	void OnMontageCancelled();
+
+	// Health 를 BaseDamage * DamageMultiplier 만큼 깎고, 0 이하가 되면 MG.Status.Dead 태그를 부여합니다.
+	void ApplyDamage(float DamageMultiplier);
+
+	// 연타로 재트리거될 때, 이전 몽타주 태스크가 뒤늦게 보내는 Interrupted 콜백이
+	// 새로 시작된 활성화를 잘못 끝내버리지 않도록 직접 정리합니다.
+	UPROPERTY()
+	TObjectPtr<UAbilityTask_PlayMontageAndWait> CurrentMontageTask;
 };
